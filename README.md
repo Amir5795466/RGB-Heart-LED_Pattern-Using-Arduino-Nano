@@ -6,15 +6,36 @@ ________________________________________________________________________________
 <img width="2752" height="1536" alt="LED_position_map" src="https://github.com/user-attachments/assets/e63967b3-6fa6-4f04-92cb-854f35658243" />
 
 -----------------------------------------------------------------
+
+## 🔌 Circuit Block Diagram
+
+```mermaid
 flowchart LR
-    BAT["3.7 V LiPo"] --> TP["TP4056 module<br/>charger + DW01 protection"]
-    USB(("USB<br/>charging")) --> TP
-    TP -- "OUT+" --> SW["ON/OFF<br/>slide switch"]
-    SW --> MT["MT3608 boost<br/>set to 5.1 V"]
-    MT -- "VOUT+ → 5V pin" --> NANO["Arduino Nano"]
-    SW -- "10 kΩ" --> A6["A6<br/>battery sense"]
-    NANO -- "16 × 220 Ω" --> LEDS["16 LEDs"]
-    BTN["Push button"] --> NANO
+    A["3.7V LiPo Battery"] --> C["TP4056 Module<br/>Charger + DW01 Protection"]
+    B["USB Charging"] --> C
+
+    C --> D["ON/OFF Slide Switch"]
+
+    D --> E["MT3608 Boost Converter<br/>Set to 5.1V"]
+    D --> F["10kΩ Resistor"]
+
+    E --> G["VOUT+ → 5V Pin"]
+    F --> H["A6 Battery Sense"]
+
+    G --> I["Arduino Nano"]
+    H --> I
+    J["Push Button"] --> I
+
+    I --> K["16 × 220Ω Resistors"]
+    K --> L["16 LEDs"]
+
+    style A fill:#263b59,color:#fff,stroke:#60a5fa
+    style C fill:#174b42,color:#fff,stroke:#34d399
+    style E fill:#65451b,color:#fff,stroke:#fbbf24
+    style I fill:#174b42,color:#fff,stroke:#34d399
+    style L fill:#542b63,color:#fff,stroke:#c084fc
+```
+
 
 --------------------------------------------------------------------
 - The TP4056 charges the LiPo over USB and protects it from over-charge, over-discharge and shorts.
